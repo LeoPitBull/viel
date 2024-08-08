@@ -12,12 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepara e executa a consulta SQL
     $sql = "INSERT INTO camisetas (cor, tamanho, quantidade, valor, descricao, material) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conexao->prepare($sql);
     if (!$stmt) {
-        die("Erro ao preparar a consulta: " . $conn->error);
+        die("Erro ao preparar a consulta: " . $conexao->error);
     }
 
-    $stmt->bind_param("ssidsis", $cor, $tamanho, $quantidade, $valor, $descricao, $material);
+    $stmt->bind_param("ssssss", $cor, $tamanho, $quantidade, $valor, $descricao, $material);
 
     if ($stmt->execute()) {
         echo "Camiseta cadastrada com sucesso!";
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 }
 
-//$conn->close();
+$conexao->close();
 ?>
 
 
